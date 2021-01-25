@@ -4,41 +4,42 @@
 un commentaire
 multiligne
 #}
-{% block body %}
+
+{#{% block body %}#}
 {# crée des variables contenant une chaine #}
-{% set product = "computer" %}
+{#{% set product = "computer" %}#}
 
 {# crée une variable contenant un tableau #}
-{% set colors = ["brown", "pink", "yellow"] %}
+{#{% set colors = ["brown", "pink", "yellow"] %}#}
 
 {# crée un objet #}
-{% set movie = {
-    "title": "Forrest Gump",
-    "Year": 1990
-} %}
-{{ username|raw }} {# permet de prendre en compte les balises html #}
-{{ producte }}
+{#{% set movie = {#}
+{#    "title": "Forrest Gump",#}
+{#    "Year": 1990#}
+{#} %}#}
+{#{{ username|raw }} #}{# permet de prendre en compte les balises html #}
+{#{{ producte }}#}
 {# boucle #}
-{% for color in colors %}
-<div>{{ loop.first }}{{ color }}</div>
-{% endfor %}
+{#{% for color in colors %}#}
+{#<div>{{ loop.first }}{{ color }}</div>#}
+{#{% endfor %}#}
 
 {# boucle #}
-{% for key, val in movie %}
+{#{% for key, val in movie %}#}
 
-    <div>{{ key }} : {{ val }}</div>
-{% endfor %}
+{#    <div>{{ key }} : {{ val }}</div>#}
+{#{% endfor %}#}
 
 {# affiche la variable #}
-{{ product }}
+{#{{ product }}#}
 
 {# conditions #}
-{% if colors|length > 3 %}
-<div>Plus que trois couleurs</div>
-{% else %}
-<div>3 ou moins</div>
-{% endif %}
+{#{% if colors|length > 3 %}#}
+{#<div>Plus que trois couleurs</div>#}
+{#{% else %}#}
+{#<div>3 ou moins</div>#}
+{#{% endif %}#}
 
-<div>{{ "now"|date("d/m/Y") }}</div>
+{#<div>{{ "now"|date("d/m/Y") }}</div>#}
 
-{% endblock %}
+{#{% endblock %}#}

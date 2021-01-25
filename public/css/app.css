@@ -1,0 +1,28 @@
+#logoSite {
+    width: 60px;
+    margin: 10px;
+}
+.logoo{
+    display: inline-flex;
+}
+body{
+    font-family: Tahoma;
+    background: #5eb5e0;
+    margin: 0;
+}
+
+#titreLogo{
+    padding-top: 10px;
+}
+
+footer{
+
+    background:#ccc;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding-top:30px;
+    height:30px;
+    text-align: center;
+    margin: 0;
+}

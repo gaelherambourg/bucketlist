@@ -6,11 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}BucketList{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="icon" href="{{ asset('favicon/favicon.png') }}">
 </head>
 <body>
     <header>
-
-
+        <div class="logoo">
+            <a href="{{ path('home') }}" title="Back home" class="top-logo">
+                <img id="logoSite" src="{{ asset('img/logo.svg') }}" alt="BucketList!">
+            </a>
+            <h1 id="titreLogo">!! BucketList !!</h1>
+        </div>
     </header>
     <main>
         {% block body %}
@@ -19,5 +24,6 @@
         {% endblock %}
 
     </main>
+<footer>©Bucket-List {{ "now"|date('d/m/Y') }}</footer>
 </body>
 </html>
