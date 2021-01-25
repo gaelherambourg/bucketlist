@@ -16,7 +16,8 @@ multiligne
     "title": "Forrest Gump",
     "Year": 1990
 } %}
-
+{{ username|raw }} {# permet de prendre en compte les balises html #}
+{{ producte }}
 {# boucle #}
 {% for color in colors %}
 <div>{{ loop.first }}{{ color }}</div>
