@@ -1,18 +1,43 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index</title>
-</head>
-<body>
-    <h1>Index du site BucketList</h1>
-    <form method="post">
-        <label for="name" name="name">Nom :</label>
-        <input type="text" id="name" name="name" width="200px" value="" placeholder="Votre nom..">
+{% extends 'base.html.twig' %}
 
-    </form>
-</body>
-</html>
+{#
+un commentaire
+multiligne
+#}
+{% block body %}
+{# crée des variables contenant une chaine #}
+{% set product = "computer" %}
+
+{# crée une variable contenant un tableau #}
+{% set colors = ["brown", "pink", "yellow"] %}
+
+{# crée un objet #}
+{% set movie = {
+    "title": "Forrest Gump",
+    "Year": 1990
+} %}
+
+{# boucle #}
+{% for color in colors %}
+<div>{{ loop.first }}{{ color }}</div>
+{% endfor %}
+
+{# boucle #}
+{% for key, val in movie %}
+
+    <div>{{ key }} : {{ val }}</div>
+{% endfor %}
+
+{# affiche la variable #}
+{{ product }}
+
+{# conditions #}
+{% if colors|length > 3 %}
+<div>Plus que trois couleurs</div>
+{% else %}
+<div>3 ou moins</div>
+{% endif %}
+
+<div>{{ "now"|date("d/m/Y") }}</div>
+
+{% endblock %}
