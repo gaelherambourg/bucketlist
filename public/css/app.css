@@ -5,7 +5,26 @@
 .logoo{
     display: inline-flex;
 }
-.headLink:hover{color:crimson !important;}
+header{
+    background-color: darkblue;
+    color: #FFFFFF;
+}
+
+header a{
+    color: #FFFFFF;
+}
+
+#titrePage{
+    text-align: center;
+}
+
+.container{
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+}
+
+a:hover{color:crimson !important;}
 
 .headLink{
     padding-top: 30px;
