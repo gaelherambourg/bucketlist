@@ -19,4 +19,12 @@ class MainController extends AbstractController
             "producte" => "pifpaf"
         ]);
     }
+
+    /**
+     * @Route("/abousus", name="aboutUs")
+     */
+    public function aboutUs()
+    {
+        return $this->render('main/aboutUs.html.twig');
+    }
 }

@@ -15,7 +15,13 @@
                 <img id="logoSite" src="{{ asset('img/logo.svg') }}" alt="BucketList!">
             </a>
             <h1 id="titreLogo">!! BucketList !!</h1>
+
         </div>
+        <div class="headLink">
+            <a href="{{ path('aboutUs') }}" title="About us">About Us</a>
+            <a href="{{ path('list') }}" title="Liste des idées">Liste des idées</a>
+        </div>
+
     </header>
     <main>
         {% block body %}

@@ -5,6 +5,14 @@
 .logoo{
     display: inline-flex;
 }
+.headLink:hover{color:crimson !important;}
+
+.headLink{
+    padding-top: 30px;
+    float: right;
+    margin-right: 10px;
+}
+
 body{
     font-family: Tahoma;
     background: #5eb5e0;
