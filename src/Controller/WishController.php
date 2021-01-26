@@ -17,12 +17,11 @@ class WishController extends AbstractController
     }
 
     /**
-     * @Route("/detail/{id}", name="wish_detail")
+     * @Route("/detail/{id}", name="wish_detail", requirements={"id": "[0-9]+"})
      */
     public function detail($id)
     {
-        echo $id;
-        return $this->render('wish/detail.html.twig');
+        return $this->render('wish/detail.html.twig',['id' => $id]);
     }
 
 
