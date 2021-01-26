@@ -11,21 +11,22 @@
 <body>
     <header>
         <div class="logoo">
-            <a href="{{ path('home') }}" title="Back home" class="top-logo">
+            <a href="{{ path('main_home') }}" title="Back home" class="top-logo">
                 <img id="logoSite" src="{{ asset('img/logo.svg') }}" alt="BucketList!">
             </a>
             <h1 id="titreLogo">!! BucketList !!</h1>
 
         </div>
         <div class="headLink">
-            <a href="{{ path('aboutUs') }}" title="About us">About Us</a>
-            <a href="{{ path('list') }}" title="Liste des idées">Liste des idées</a>
+            <a href="{{ path('main_aboutUs') }}" title="About us">About Us</a>
+            <a href="{{ path('wish_list') }}" title="Liste des idées">Liste des idées</a>
         </div>
 
     </header>
     <main>
-        {% block body %}
 
+        {% block body %}
+            <h1>Accueil</h1>
 
         {% endblock %}
 

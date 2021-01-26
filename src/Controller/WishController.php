@@ -9,19 +9,20 @@ class WishController extends AbstractController
 {
 
     /**
-     * @Route("/list", name="list")
+     * @Route("/list", name="wish_list")
      */
     public function list()
     {
-        return $this->render('main/list.html.twig');
+        return $this->render('wish/list.html.twig');
     }
 
     /**
-     * @Route("/detail", name="detail")
+     * @Route("/detail/{id}", name="wish_detail")
      */
-    public function detail()
+    public function detail($id)
     {
-        return $this->render('main/detail.html.twig');
+        echo $id;
+        return $this->render('wish/detail.html.twig');
     }
 
 
