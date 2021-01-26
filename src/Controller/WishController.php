@@ -13,14 +13,16 @@ class WishController extends AbstractController
      */
     public function list()
     {
+        //todo: aller chercher tous les wishes dans la BDD
         return $this->render('wish/list.html.twig');
     }
 
     /**
-     * @Route("/detail/{id}", name="wish_detail", requirements={"id": "[0-9]+"})
+     * @Route("/list/detail/{id}", name="wish_detail", requirements={"id": "\d+"})
      */
     public function detail($id)
     {
+        //todo: aller chercher dans la BDD le souhait dont l'id est dans l'url
         return $this->render('wish/detail.html.twig',['id' => $id]);
     }
 

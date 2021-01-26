@@ -16,12 +16,15 @@ header a{
 
 #titrePage{
     text-align: center;
+    border-style: double;
+    border-radius: 10px;
 }
 
 .container{
     max-width: 600px;
     margin: auto;
     padding: 2rem;
+    background-color: cornflowerblue;
 }
 
 a:hover{color:crimson !important;}
