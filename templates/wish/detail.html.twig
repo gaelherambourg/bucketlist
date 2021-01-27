@@ -6,7 +6,10 @@
 
     <div class="container">
         <h1 id="titrePage">Détails souhait</h1>
-        <p>{{ id }}</p>
+        <p>{{ wish1.title }}</p>
+        <p>{{ wish1.description }}</p>
+        <p>{{ wish1.author }}</p>
+        <p>{{ wish1.dateCreated|date('d/m/Y') }}</p>
     </div>
 
 {% endblock %}
