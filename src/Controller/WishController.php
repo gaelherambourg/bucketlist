@@ -14,7 +14,7 @@ class WishController extends AbstractController
      */
     public function list(WishRepository $wishRepository)
     {
-        //todo: aller chercher tous les wishes dans la BDD
+        //aller chercher tous les wishes dans la BDD
         //$wishes = $wishRepository->findAll();
         $wishes = $wishRepository->findBy(["isPublished"=>true], ["dateCreated"=>"DESC"], 200,0);
         //->findOneBy();
@@ -32,8 +32,15 @@ class WishController extends AbstractController
      */
     public function detail($id, WishRepository $wishRepository)
     {
-        //todo: aller chercher dans la BDD le souhait dont l'id est dans l'url
+        //aller chercher dans la BDD le souhait dont l'id est dans l'url
         $w = $wishRepository->find($id);
+
+        //qu'est ce qu'on fait si ce wish n'existe pas en Bdd
+        if(!$w){
+            //alors on déclenche une 404
+            throw $this->createNotFoundException('This wish is gone.');
+        }
+
         return $this->render('wish/detail.html.twig',['id' => $id, 'wish1'=>$w]);
     }
 

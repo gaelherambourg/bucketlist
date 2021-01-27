@@ -22,6 +22,8 @@
                 <td>{{ wish.dateCreated|date('d/m/Y') }}</td>
 
             </tr>
+                {% else %}
+                <div>There are no wishes!</div>
             {% endfor %}
         </table>
     </div>
