@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}BucketList{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">#}
     <link rel="icon" href="{{ asset('favicon/favicon.png') }}">
 </head>
 <body>
@@ -21,6 +22,7 @@
             <a href="{{ path('main_aboutUs') }}" title="About us">About Us</a>
             <a href="{{ path('wish_list') }}" title="Liste des idées">Liste des idées</a>
             <a href="{{ path('main_testData') }}" title="test de datas">Test données</a>
+            <a href="{{ path('wish_create') }}" title="Créer un souhait">Créer un souhait</a>
         </div>
 
     </header>
