@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent()}} | Wishes {% endblock %}
+{% block body %}
+
+
+<div class="container">
+    {% for pays in response %}
+    <div>
+        {{ pays['name'] }}
+        {{ pays['population'] }}
+        {% for lang in pays['languages'] %}
+        {{ lang['name'] }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

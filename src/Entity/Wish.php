@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\WishRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @UniqueEntity(fields={"title"}, message="Cette fiche existe déjà !")
  * @ORM\Entity(repositoryClass=WishRepository::class)
  */
 class Wish
@@ -18,11 +21,19 @@ class Wish
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Veuillez donnez un titre à votre souhait")
+     * @Assert\Length(
+     *     min=4,
+     *     max=250,
+     *     minMessage="Trop court ! 4 caractères minimum",
+     *     maxMessage="Trop long ! Max 250 caractères"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Veuillez décrire votre souhait !!!")
      * @ORM\Column(type="text")
      */
     private $description;
@@ -41,6 +52,12 @@ class Wish
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreated;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="wishes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -103,6 +120,18 @@ class Wish
     public function setDateCreated(?\DateTimeInterface $dateCreated): self
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

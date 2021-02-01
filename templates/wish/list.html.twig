@@ -13,6 +13,7 @@
                 <th>Description</th>
                 <th>Auteur</th>
                 <th>Date de Création</th>
+                <th>Catégorie</th>
             </tr>
             {% for wish in wishes %}
             <tr>
@@ -20,6 +21,7 @@
                 <td>{{ wish.description }}</td>
                 <td>{{ wish.author }}</td>
                 <td>{{ wish.dateCreated|date('d/m/Y') }}</td>
+                <td>{{ wish.category.name }}</td>
 
             </tr>
                 {% else %}
