@@ -6,49 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}BucketList{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">#}
+    {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> #}
     <link rel="icon" href="{{ asset('favicon/favicon.png') }}">
 </head>
 <body>
-    <header>
-        <div class="logoo">
-            <a href="{{ path('main_home') }}" title="Back home" class="top-logo">
-                <img id="logoSite" src="{{ asset('img/logo.svg') }}" alt="BucketList!">
-            </a>
-            <h1 id="titreLogo">!! BucketList !!</h1>
+<header>
 
-        </div>
-        <div class="headLink">
+    <div class="logoo">
+        <a href="{{ path('main_home') }}" title="Back home" class="top-logo">
+            <img id="logoSite" src="{{ asset('img/logo.svg') }}" alt="BucketList!">
+        </a>
+        <h1 id="titreLogo">!! BucketList !!</h1>
+        {% if app.user %}
+            <h2 id="messBienvenu">Hello {{ app.user.pseudo }}</h2>
+        {% endif %}
+
+    </div>
+
+    <div class="headLink">
+
+        {% if app.user %}
+            <a href="{{ path('wish_create') }}" title="Créer un souhait">Créer un souhait</a>
             <a href="{{ path('main_aboutUs') }}" title="About us">About Us</a>
             <a href="{{ path('wish_list') }}" title="Liste des idées">Liste des idées</a>
-            <a href="{{ path('main_testData') }}" title="test de datas">Test données</a>
-            <a href="{{ path('wish_create') }}" title="Créer un souhait">Créer un souhait</a>
+            <a href="{{ path('app_logout') }}" title="Se déconnecter">Déconnexion</a>
+            {% if 'ROLE_ADMIN' in app.user.roles %}
+                <a href="{{ path('admin_home') }}" title="Back office">Back Office</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ path('app_register') }}" title="S'inscrire">S'inscrire</a>
+            <a href="{{ path('app_login') }}" title="Se connecter">Connexion</a>
+        {% endif %}
+
+
+    </div>
+
+</header>
+<main>
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% block body %}
+        <div class="container">
+            <h1 id="titrePage">Accueil</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur deserunt enim exercitationem
+                fugiat iure maxime mollitia perferendis velit. Culpa, error explicabo incidunt inventore ipsa minima
+                nemo nihil repellendus rerum totam.
+            </p>
+
         </div>
 
-    </header>
-    <main>
-        {# read and display all flash messages #}
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% block body %}
-            <div class="container">
-            <h1 id="titrePage">Accueil</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur deserunt enim exercitationem
-                    fugiat iure maxime mollitia perferendis velit. Culpa, error explicabo incidunt inventore ipsa minima
-                    nemo nihil repellendus rerum totam.
-                </p>
+    {% endblock %}
 
-            </div>
-
-        {% endblock %}
-
-    </main>
+</main>
 <footer>©Bucket-List {{ "now"|date('d/m/Y') }}</footer>
 </body>
 </html>

@@ -37,7 +37,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $pseudo;
 
@@ -73,11 +73,13 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+//        $roles = $this->roles;
+//        // guarantee every user at least has ROLE_USER
+//        $roles[] = 'ROLE_USER'; //ROLE_ADMIN par exemple
+//
+//        return array_unique($roles);
 
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -118,10 +120,12 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
-    public function getPseudo(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getPseudo(): string
     {
-        return $this->pseudo;
+        return (string) $this->pseudo;
     }
 
     public function setPseudo(string $pseudo): self

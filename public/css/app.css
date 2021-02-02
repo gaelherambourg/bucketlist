@@ -2,8 +2,13 @@
     width: 60px;
     margin: 10px;
 }
+
 .logoo{
     display: inline-flex;
+}
+#messBienvenu{
+    padding-top: 18px;
+    margin-left: 30px;
 }
 header{
     background-color: darkblue;

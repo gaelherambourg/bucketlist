@@ -7,6 +7,7 @@ use App\Form\WishType;
 use App\Repository\WishRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Client;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class WishController extends AbstractController
 {
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/list", name="wish_list")
      */
     public function list(WishRepository $wishRepository)
@@ -36,6 +38,7 @@ class WishController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/list/detail/{id}", name="wish_detail", requirements={"id": "\d+"})
      */
     public function detail($id, WishRepository $wishRepository)
@@ -53,6 +56,7 @@ class WishController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/create", name="wish_create")
      */
     public function create(Request $request, EntityManagerInterface $entityManager):Response
@@ -60,8 +64,14 @@ class WishController extends AbstractController
         //Création d'une instance de notre entité, qi sera eventuellementsauvegarder en base de données
         $wish = new Wish();
 
+        //retourne l'entité user de l'utilisateur connecté
+        $user = $this->getUser();
+        //pré rempli le champs author
+        $wish->setAuthor($user->getPseudo());
+
         //Créer une instance du form, en lui associant notre entité
         $form = $this->createForm(WishType::class, $wish);
+        //->add('author',null,['attr'=>['value'=>$this->getUser()->getPseudo()]]); //Pré remplir le champs Author avec le pseudo de l'utilisateur connecté
 
         //prends les données du formulaire et les hydrates dans mon entité
         $form->handleRequest($request);
