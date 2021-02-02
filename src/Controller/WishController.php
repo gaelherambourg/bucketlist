@@ -23,13 +23,14 @@ class WishController extends AbstractController
     {
         //aller chercher tous les wishes dans la BDD
         //$wishes = $wishRepository->findAll();
-        $wishes = $wishRepository->findBy(["isPublished"=>true], ["dateCreated"=>"DESC"], 200,0);
+        //$wishes = $wishRepository->findBy(["isPublished"=>true], ["dateCreated"=>"DESC"], 200,0);
         //->findOneBy();
         //dd($wishes);
         //$a = $wishRepository->findByIsPublished(1);
         //dd($a);
         //$wish1 = $wishRepository->find(1);
 
+        $wishes = $wishRepository->findCategorizedWishes();
 
         return $this->render('wish/list.html.twig', ['wishes'=>$wishes]);
     }
