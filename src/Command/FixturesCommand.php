@@ -27,7 +27,7 @@ class FixturesCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Add a short description for your command')
+            ->setDescription('Load dummy data for good DX')
         ;
     }
 
@@ -37,7 +37,7 @@ class FixturesCommand extends Command
 
         $faker = \Faker\Factory::create("fr_FR");
 
-        $categoryNames = ["Sport", "Travel", "Etc"];
+        $categoryNames = ["Sport", "Travel & Adventure", "Human Relations", "Entertainment", "Others"];
         $categories = [];
         foreach ($categoryNames as $categoryName){
             $category = new Category();
@@ -46,6 +46,9 @@ class FixturesCommand extends Command
             $categories[]=$category;
         }
 
+        $this->entityManager->flush();
+
+        //crée 200 wish aléatoire
         for($i=0; $i<200; $i++){
 
             $wish = new Wish();
@@ -62,7 +65,7 @@ class FixturesCommand extends Command
 
         $this->entityManager->flush();
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('C\'est bon');
 
         return Command::SUCCESS;
     }

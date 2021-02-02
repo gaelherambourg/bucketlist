@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Wish;
 use App\Form\WishType;
+use App\Notification\Notifier;
 use App\Repository\WishRepository;
+use App\Util\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Client;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -59,7 +61,10 @@ class WishController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/create", name="wish_create")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager):Response
+    public function create(Request $request,
+                           EntityManagerInterface $entityManager,
+                           Censurator $censurator
+                           ):Response
     {
         //Création d'une instance de notre entité, qi sera eventuellementsauvegarder en base de données
         $wish = new Wish();
@@ -81,6 +86,7 @@ class WishController extends AbstractController
             //hydrater les propriétés manquantes
             $wish->setDateCreated(new \DateTime());
 
+            $wish->setDescription($censurator->purify($wish->getDescription()));
 
             //déclenche l'insert en bdd
             $entityManager->persist($wish);
@@ -88,6 +94,9 @@ class WishController extends AbstractController
 
             //Créer un message en session
             $this->addFlash('success', 'Votre souhait a bien été ajouté !');
+
+            //Envoi un mail à l'admin
+            //$notifier->sendNewLessonCardNotificationToAdmin();
 
             //Créer une redirection vers une autre page
             return $this->redirectToRoute('wish_detail',['id'=> $wish->getId()]);
