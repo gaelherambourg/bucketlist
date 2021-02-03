@@ -7,9 +7,11 @@ use App\Form\WishType;
 use App\Notification\Notifier;
 use App\Repository\WishRepository;
 use App\Util\Censurator;
+use claviska\SimpleImage;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Client;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,9 +65,12 @@ class WishController extends AbstractController
      */
     public function create(Request $request,
                            EntityManagerInterface $entityManager,
-                           Censurator $censurator
+                           Censurator $censurator,
+                           //defini dans config/service.yaml
+                           string $uploadDir
                            ):Response
     {
+
         //Création d'une instance de notre entité, qi sera eventuellementsauvegarder en base de données
         $wish = new Wish();
 
@@ -86,7 +91,29 @@ class WishController extends AbstractController
             //hydrater les propriétés manquantes
             $wish->setDateCreated(new \DateTime());
 
+            //Censure les mots pas gentils ^^
             $wish->setDescription($censurator->purify($wish->getDescription()));
+
+            //on récupère l'image uploadée s'il y a lieu
+            /** @var UploadedFile $picture */
+            $picture = $form->get('picture')->getData();
+
+            if($picture)
+            {
+                //Génére un nom de fichier aléatoire avec la bonne extension
+                $newFileName = uniqid() . "." . $picture->guessExtension();
+                //Déplace le fichier uploadé dans public/img/
+                $picture->move($uploadDir, $newFileName);
+                //On hydrate la prpriété de notre entité avec le nom du fichier
+                $wish->setPictureFileName($newFileName);
+
+                $image = new SimpleImage();
+                $image->fromFile($uploadDir . $newFileName)
+                      ->bestFit(200, 200)
+                      ->colorize('DarkBlue')
+                      ->toFile($uploadDir . "small/" . $newFileName);
+            }
+
 
             //déclenche l'insert en bdd
             $entityManager->persist($wish);
