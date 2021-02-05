@@ -15,6 +15,19 @@ header{
     color: #FFFFFF;
 }
 
+.container form label{
+    display: none;
+}
+
+.container form input, select, textarea{
+    margin: 10px;
+}
+#titreRegister{
+    margin: 10px;
+}
+.btn{
+    margin: 10px;
+}
 header a{
     color: #FFFFFF;
 }
@@ -76,33 +89,3 @@ footer{
     margin: 0;
 }
 
-/* form */
-label{
-    display: block;
-    margin-top: 10px;
-
-}
-.form-check{
-    margin-top: 10px;
-}
-.form-check label{
-    display: initial;
-}
-#wish_submit{
-    background-color: blue;
-    color: #FFFFFF;
-    width: 125px;
-    margin-top: 10px;
-    border-radius: 10px;
-    height: 25px;
-}
-#wish_description{
-    width: 250px;
-    height: 50px;
-    border-radius: 10px;
-}
-#wish .form-group input[type="text"]{
-    width: 250px;
-    height: 25px;
-    border-radius: 10px;
-}
